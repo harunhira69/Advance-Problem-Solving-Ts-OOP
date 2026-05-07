@@ -8,6 +8,7 @@ const filterEvenNumbers = (numbers :number[]):number[]=>{
 
 
 }
+filterEvenNumbers([1, 2, 3, 4, 5, 6]);
 
 // console.log(filterEvenNumbers([1, 2, 3, 4, 5, 6]));
 
@@ -15,8 +16,10 @@ const filterEvenNumbers = (numbers :number[]):number[]=>{
 
 const reverseString = (input:string):string=>{
    const reversed =  input.split('').reverse().join('');
-   return (JSON.stringify(reversed));
+   return (reversed);
 }
+
+reverseString("typescript");
 
 // console.log(reverseString("typescript"));
 
@@ -26,13 +29,15 @@ type StringOrNumber = string | number;
 
 const checkType = (input:StringOrNumber)=>{
      if(typeof input === "string"){
-        return JSON.stringify("String");
+        return "String";
      }else if(typeof input ==="number"){
-        return JSON.stringify("Number");
+        return "Number";
      }
 
 
 }
+checkType("Hello");
+checkType(42)
 // console.log(checkType("Hello"));
 // console.log(checkType(42));
 
@@ -40,11 +45,12 @@ const checkType = (input:StringOrNumber)=>{
 
 
 const getProperty = <X>(obj:X,key: keyof X)=>{
-    return JSON.stringify(obj[key])
+    return obj[key]
 }
 
 
-// const user = { id: 1, name: "John Doe", age: 21 };
+const user = { id: 1, name: "John Doe", age: 21 };
+getProperty(user, "name")
 // console.log(getProperty(user, "name"))
 
 
@@ -56,15 +62,15 @@ interface Book{
     publishedYear:number;
 }
 
-const toggleReadStatus = (book:Book)=>{
+const toggleReadStatus = (bookinfo:Book,isRead:boolean=true)=>{
     return{
-        ...book,
-        isRead
+      ...bookinfo,
+      isRead
     }
 }
 
-// const myBook = { title: "TypeScript Guide", author: "Jane Doe", publishedYear: 2024 };
-// toggleReadStatus(myBook);
+const myBook = { title: "TypeScript Guide", author: "Jane Doe", publishedYear: 2024 };
+toggleReadStatus(myBook)
 
 // problem-6:Create a class Person with a name and age. Then, create a subclass Student that adds a grade property. Include a method getDetails in the Student class that returns a string with the student's name, age, and grade.
 
@@ -87,13 +93,30 @@ class Student extends Person{
     }
 
     getDetails():string{
-        return `Name:${this.name}, Age:${this.age}, Grade:${this.grade}`
+        return `Name: ${this.name}, Age: ${this.age}, Grade: ${this.grade}`
     }
 
 }
 
 const student = new Student("Alice", 20, "A");
-console.log(student.getDetails())
+student.getDetails()
 
-// Sample Output:
-// "Name: Alice, Age: 20, Grade: A";
+
+
+// problem-7
+// Create a function getIntersection that takes two arrays of 
+// numbers and returns a new array containing only the elements that are present
+//  in both arrays.
+
+const getIntersection = (X:number[],Y:number[]):number[]=>{
+    return X.filter((item)=> Y.includes((item)))
+}
+getIntersection([1, 2, 3, 4, 5], [3, 4, 5, 6, 7])
+
+
+
+// console.log( getIntersection([1, 2, 3, 4, 5], [3, 4, 5, 6, 7]))
+
+
+
+
